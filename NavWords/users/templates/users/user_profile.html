@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ title }} {{ user.username }}</title>
+{% endblock title %}
+
+{% block content %}
+<form class="user_profile" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>{{ form.non_fields_error }}</div>
+
+    {% if user.photo %}
+        <img src="{{ user.photo.url }}" alt="Avatar" width="100">
+    {% endif %}
+
+    <div class="user-form">
+        {% for f in form %}
+        {% if f.name == "photo" %}
+            <p class="user-avatar"><label for="id_photo">Upload new foto</label>
+            <input type="file" name="photo" id="id_photo" hidden></p>
+        {% else %}
+            <p class="user-form-field"><label>{{ f.label }}</label>{{ f }}</p>
+            <div>{{ f.errors }}</div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <button type="submit" value="Save">Save</button> <a href="{% url 'users:password_change' %}">Change password</a>
+</form>
+{% endblock content %}
+
+

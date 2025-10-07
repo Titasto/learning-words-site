@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock title %}
+
+{% block content %}
+<div class="lists-container">
+    <h2>Lists</h2>
+    <div class="lists">
+        {% for c in catalog %}
+            <a href="{{ c.get_absolute_url }}" class="list-link">{{ c.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="add-list">
+    <p><a href="{% url 'words:add_lists' %}">+ Add new list</a></p>
+</div>
+{% endblock content %}

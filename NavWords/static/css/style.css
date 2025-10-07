@@ -1,0 +1,431 @@
+/* ====== Общие стили ====== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+}
+
+/* ====== Верхняя панель (navbar) ====== */
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 30px;
+    background: #222;
+    color: #fff;
+    position: relative;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.navbar form {
+    display: inline;
+}
+
+.navbar button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.navbar button:hover {
+    text-decoration: underline;
+}
+
+/* ====== Карточки ====== */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 80px;
+    flex-wrap: wrap; /* чтобы карточки переносились на маленьких экранах */
+}
+
+.card {
+    width: 200px;
+    height: 250px;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    background: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: #000;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.card a {
+    text-decoration: none;
+    color: #222;
+}
+
+/* ====== Адаптив под телефоны ====== */
+@media (max-width: 768px) {
+    .cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card {
+        width: 80%;
+        max-width: 300px;
+    }
+}
+
+/* Заголовок */
+form label {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+
+}
+
+/* Список слов под заголовком в одну линию через черточку */
+form .form-row {
+    display: inline;
+    font-size: 18px;
+}
+
+form .form-row::after {
+    content: " — ";
+    margin: 0 6px;
+    color: #666;
+}
+
+/* У последнего элемента убираем черточку */
+form .form-row:last-child::after {
+    content: "";
+}
+
+/* Кнопка */
+form button {
+    padding: 10px 22px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4a90e2;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+form button:hover {
+    background-color: #357ab8;
+}
+
+/* Контейнер */
+.lists-container {
+    text-align: center;
+    margin-top: 80px;
+}
+
+/* Заголовок */
+.lists-container h2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* Списки вниз */
+.lists {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* расстояние между пунктами */
+}
+
+/* Ссылки */
+.lists .list-link {
+    font-size: 22px;
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 25px; /* место под черточку */
+}
+
+/* Черточка */
+.lists .list-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;   /* длина линии */
+    height: 2px;    /* толщина */
+    background: linear-gradient(to right,
+        transparent,
+        rgba(0,0,0,0.8),
+        transparent
+    );
+}
+
+/* У последнего убираем черточку */
+.lists .list-link:last-child::after {
+    content: none;
+}
+
+/* Ссылка "Add new list" */
+.add-list {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.add-list a {
+    font-size: 18px;
+    text-decoration: none;
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+.add-list a:hover {
+    text-decoration: underline;
+}
+
+/* ====== Навбар ====== */
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px 20px;
+    background: #222;
+    color: #fff;
+    height: 50px; /* фиксируем высоту */
+    box-sizing: border-box;
+}
+
+.navbar p {
+    margin: 0;
+}
+
+/* ====== Списки ====== */
+.lists-container {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.lists-container h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.lists {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.list-link {
+    font-size: 22px;
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.list-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(0,0,0,0.9),
+        transparent
+    );
+}
+
+.list-link:last-child::after {
+    content: none;
+}
+
+/* ====== Settings ====== */
+.settings-container {
+    text-align: center;    /* выравниваем по центру */
+    margin-top: 0px;      /* отступ от списка */
+}
+
+.settings-container h3 {
+    font-size: 20px;       /* меньше, чем у Lists */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.settings-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;             /* расстояние между пунктами */
+}
+
+.settings-container label {
+    font-size: 16px;       /* меньше текста */
+    font-weight: normal;   /* не жирный */
+}
+
+.settings-container button {
+    margin-top: 20px;
+    padding: 8px 18px;
+    font-size: 14px;       /* меньше кнопка */
+    border: none;
+    border-radius: 6px;
+    background-color: #4a90e2;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.settings-container button:hover {
+    background-color: #357ab8;
+}
+
+.choice_bar {
+    display: flex;
+    gap: 30px;
+}
+
+.reg_field, .user-form-field{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+.reg_field label {
+    margin: 0;
+}
+
+input[type="submit"] {
+    padding: 10px 40px;
+    border-radius: 8px;
+    background-color: beige;
+    border: 1px solid lightgray;
+    cursor: pointer;
+    transition: background-color 0.5s;
+ }
+
+ input[type="submit"]:hover {
+    background-color: orange;
+ }
+
+
+ .reg_form, .word-form, .user_profile, .user-form, .list-form{
+ display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 325px;
+    margin: 0 auto;
+ }
+
+ .login {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 325px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+ .word-row{
+     display: flex;
+    gap: 20px;
+ }
+
+ .form-label{
+ margin-bottom: 15px;
+ }
+
+ .form-container{
+     display: flex;
+    flex-direction: column;
+    gap: 20px;
+ }
+
+.user-avatar{
+border: 1px solid;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.user-avatar label {
+  font-size: 15px;
+}
+
+.cycling{
+display: flex;
+    gap: 25px;
+}
+
+.word{
+    text-align: center;
+    margin-top: 200px;
+    font-size: 40px;
+}
+
+.words_for_choice{
+display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.field{
+display: flex;
+    gap: 20px;
+}
+
+.show_result{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+    gap: 20px;
+    font-size: 40px;
+}
+
+.login_error{
+    text-align: center;
+}
+
+.navigation {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    display: flex
+;
+    gap: 100px;}

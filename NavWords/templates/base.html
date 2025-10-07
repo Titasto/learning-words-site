@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% block title %}
+            <title>{{ title }}</title>
+        {% endblock title %}
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navigation">
+                <a class="" href="{% url 'words:words' %}">Words</a>
+                <a class="" href="{% url 'words:add_lists' %}">Create</a>
+                <a class="" href="{% url 'training:choice_test' %}">Challenge</a>
+                <a class="" href="{% url 'users:contact' %}">Feedback</a>
+            </div>
+            {% if not user.is_authenticated %}
+                <p><a href="{% url 'users:login' %}">Login</a> | <a href="{% url 'users:register' %}">Registration</a>
+            {% elif user.is_authenticated %}
+                <p><a href="{% url 'users:user_profile' %}">{{ user.username }}</a></p>
+                <form method="POST" action="{% url 'users:logout' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background:none;border:none;color:#fff;cursor:pointer;">Logout</button>
+                </form>
+
+            {% endif %}
+        </div>
+    {% block content %}
+          <div class="cards">
+              <a class="card" href="{% url 'words:words' %}">Words</a>
+              <a class="card" href="{% url 'words:add_lists' %}">Create</a>
+              <a class="card" href="{% url 'training:choice_test' %}">Challenge</a>
+          </div>
+    {% endblock content %}
+    </body>
+</html>
+
+

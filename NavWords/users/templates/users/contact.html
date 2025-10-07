@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock title %}
+
+{% block content %}
+<div class="contact_entry">
+    {% if user.is_authenticated %}
+        <h2>Hello, {{ user.username }}!</h2>
+    {% else %}
+        <h2>Hello, mate!</h2>
+    {% endif %}
+
+    <p>On this page, you can share your thoughts about your experience on our website — tell us what you liked, what could be better, or if you ran into any issues.
+    Every bit of feedback means a lot to us and helps make our site even more comfortable and enjoyable for you.</p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div>{{ form.non_fields_error }}</div>
+
+    {% for field in form %}
+        <div>
+            <p><label>{{ field.label }}</label>{{ field }}</p>
+            <div>{{ field.errors }}</div>
+        </div>
+    {% endfor %}
+
+    <button type="submit">Send</button>
+</form>
+{% endblock content %}

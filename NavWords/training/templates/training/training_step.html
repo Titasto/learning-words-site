@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock title %}
+
+{% block content %}
+<div class="word">
+    {% if type_training == 'reverse' %}
+        <p>{{ word.english }}</p>
+        <br>
+    {% elif  type_training == 'normal' %}
+        <p>{{ word.translation }}</p>
+        <br>
+    {% endif %}
+</div>
+
+<form class="words_for_choice" method="post">
+    {% csrf_token %}
+
+    {% if mode == 'flip_mode' %}
+        {% if type_training == 'reverse' %}
+                    {% for choice in words %}
+                        <label>
+                            {{ choice.translation }}
+                        </label>
+                    {% endfor %}
+                {% elif type_training == 'normal' %}
+                    {% for choice in words %}
+                        <label>
+                            {{ choice.english }}
+                        </label>
+                    {% endfor %}
+                {% endif %}
+    {% else %}
+        <div class="field">
+            {% if word.level == 1 %}
+
+                {% if type_training == 'reverse' %}
+                    {% for choice in words %}
+                        <label>
+                            <input type="radio" name="translation" value="{{ choice.translation }}" required>
+                            {{ choice.translation }}
+                        </label>
+                    {% endfor %}
+                {% elif type_training == 'normal' %}
+                    {% for choice in words %}
+                        <label>
+                            <input type="radio" name="english" value="{{ choice.english }}" required>
+                            {{ choice.english }}
+                        </label>
+                    {% endfor %}
+                {% endif %}
+
+            {% elif word.level == 2 %}
+                {% if type_training == 'reverse' %}
+                    <input type="text" name="translation" required>
+                {% elif type_training == 'normal' %}
+                    <input type="text" name="english" required>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+    <button type="submit">Next</button>
+
+</form>
+
+{% endblock content %}

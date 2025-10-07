@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock title %}
+
+{% block content %}
+<form action="" method="post" class="word-form">
+    {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors}}</div>
+    {% for f in form %}
+    <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+    <div class="form-container">
+        <div class="word-row">
+            <input type="text" name="english" placeholder="Введите слово">
+            <input type="text" name="translation" placeholder="Введите перевод">
+        </div>
+    </div>
+    <button type="button" class="add-row">+</button>
+    <button type="submit">Сохранить</button>
+</form>
+
+<script>
+document.querySelectorAll('.add-row').forEach(button => {
+    button.addEventListener('click', function() {
+        const form = button.closest('.word-form');
+        const container = form.querySelector('.form-container');
+        const newRow = container.querySelector('.word-row').cloneNode(true);
+        newRow.querySelectorAll('input').forEach(input => input.value = '');
+        container.appendChild(newRow);
+    });
+});
+</script>
+{% endblock content%}

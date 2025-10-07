@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock title %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="lists-container">
+        <h2>Lists</h2>
+        <div class="lists">
+            {% if catalog %}
+                {% for c in catalog %}
+                    <label>
+                        <input type="radio" name="vocabulary" value="{{ c.name }}">
+                        {{ c.name }}
+                    </label>
+                {% endfor %}
+            {% else %}
+                <p>You don`t have any vocabulary's yet. You can <a href="{% url 'words:add_lists' %}">create</a> them</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="settings-container">
+        <h3>Settings</h3>
+            <div class="choice_bar">
+                <label>
+                    <input type="radio" name="translation" value="reverse" required>
+                    Reverse Translation
+                </label>
+                <label>
+                    <input type="radio" name="translation" value="normal">
+                    Normal mode
+                </label>
+                <label>
+                    <input type="radio" name="mode" value="flip_mode" required>
+                    Flip mode
+                </label>
+                <label>
+                    <input type="radio" name="mode" value="practice_mode">
+                    Practice mode
+                </label>
+                <label>
+                    <input type="radio" name="mode" value="challenge_mode">
+                    Challenge mode
+                </label>
+            </div>
+            <button type="submit">Save</button>
+    </div>
+</form>
+{% endblock content %}
