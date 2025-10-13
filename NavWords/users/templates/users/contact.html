@@ -16,16 +16,20 @@
     Every bit of feedback means a lot to us and helps make our site even more comfortable and enjoyable for you.</p>
 </div>
 
-<form method="post">
+<form method="post" class="list-form">
+
     {% csrf_token %}
 
     <div>{{ form.non_fields_error }}</div>
 
     {% for field in form %}
-        <div>
-            <p><label>{{ field.label }}</label>{{ field }}</p>
-            <div>{{ field.errors }}</div>
-        </div>
+            {% if field.name == 'captcha' %}
+                <p class="captcha_general"><label>{{ field.label }}</label>{{ field }}</p>
+                <div>{{ field.errors }}</div>
+            {% else %}
+                <p class="user-form-field"><label>{{ field.label }}</label>{{ field }}</p>
+                <div>{{ field.errors }}</div>
+            {% endif %}
     {% endfor %}
 
     <button type="submit">Send</button>

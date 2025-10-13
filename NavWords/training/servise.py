@@ -91,7 +91,7 @@ class QueryHandle:
 
         data = {
             'new_list': new_list,
-            'per_cent': per_cent
+            'per_cent': round(per_cent)
         }
 
         return data

@@ -54,6 +54,8 @@ class ContactView(FormView):
         user = form.cleaned_data['username']
         user_email = form.cleaned_data['email']
 
+        responce = super().form_valid(form)
+
         send_mail(
             f'Feedback from {user}',
             message=message,
@@ -61,5 +63,4 @@ class ContactView(FormView):
             recipient_list=[settings.ADMIN_EMAIL,],
             fail_silently = False
         )
-
-        return super().form_valid(form)
+        return responce

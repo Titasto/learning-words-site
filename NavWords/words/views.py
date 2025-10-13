@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
-
 from django.views.generic import ListView, CreateView, UpdateView
 from words.models import Word, WordList
 from words.forms import AddWordsList
@@ -18,7 +17,7 @@ class UserWordsList(LoginRequiredMixin, ListView):
     extra_context = {'title': 'Vocabulary'}
 
     def get_queryset(self):
-        return WordList.objects.filter(user=self.request.user)
+        return WordList.objects.filter(user=self.request.user).select_related('user')
 
 
 class UserList(LoginRequiredMixin, UpdateView):
@@ -29,6 +28,9 @@ class UserList(LoginRequiredMixin, UpdateView):
     extra_context = {'label': 'Naming'}
     form_class = AddWordsList
     success_url = reverse_lazy('home')
+
+    def get_queryset(self):
+        return WordList.objects.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -42,14 +44,15 @@ class UserList(LoginRequiredMixin, UpdateView):
         if word_formset.is_valid():
             word_formset.save()
             return super().form_valid(form)
-        return super().form_invalid(form)
+        return self.render_to_response(
+            self.get_context_data(form=form, word_formset=word_formset))
 
 
 class CreateForm(LoginRequiredMixin, CreateView):
     template_name = 'words/add_list_words.html'
     form_class = AddWordsList
     success_url = reverse_lazy('home')
-    extra_context = {'title': 'Create list'}
+    extra_context = {'title': 'Create l ist'}
 
     def form_valid(self, form):
         form.instance.user = self.request.user

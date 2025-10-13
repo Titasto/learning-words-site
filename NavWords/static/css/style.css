@@ -7,13 +7,15 @@ body {
 
 /* ====== Верхняя панель (navbar) ====== */
 .navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 10px 30px;
     background: #222;
     color: #fff;
-    position: relative;
 }
 
 .navbar a {
@@ -49,7 +51,8 @@ body {
     display: flex;
     justify-content: center;
     gap: 40px;
-    margin-top: 80px;
+    margin: 0 auto;
+    margin-top: 100px;
     flex-wrap: wrap; /* чтобы карточки переносились на маленьких экранах */
 }
 
@@ -307,19 +310,18 @@ form button:hover {
     background-color: #357ab8;
 }
 
-.choice_bar {
-    display: flex;
-    gap: 30px;
-}
 
-.reg_field, .user-form-field{
+.reg_field, .user-form-field, .password-change-field {
     display: flex;
     align-items: center;
     gap: 20px;
     width: 100%;
     justify-content: space-between;
-
 }
+
+
+
+
 
 .reg_field label {
     margin: 0;
@@ -339,8 +341,54 @@ input[type="submit"] {
  }
 
 
- .reg_form, .word-form, .user_profile, .user-form, .list-form{
- display: flex;
+ .reg_form, .word-form, .user_profile, .list-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 325px;
+    margin: 0 auto;
+    margin-top: 70px;
+ }
+
+ .new-password-field {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 120%;
+    justify-content: space-between;
+
+ }
+
+.reset_form, .reset_confirm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 325px;
+    margin: 0 auto;
+    margin-top: 70px;
+ }
+
+ .password_change {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 70px;
+ }
+
+.send_mail, .reset_done {
+    margin: 0 auto;
+    margin-top: 150px;
+    max-width: 500px;
+    text-align: center;
+}
+
+ .user-form {
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
@@ -373,16 +421,13 @@ input[type="submit"] {
     gap: 20px;
  }
 
-.user-avatar{
+.user-avatar label {
+  font-size: 15px;
 border: 1px solid;
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
     margin: 0;
-}
-
-.user-avatar label {
-  font-size: 15px;
 }
 
 .cycling{
@@ -429,3 +474,82 @@ display: flex;
     display: flex
 ;
     gap: 100px;}
+
+.bar_choice {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-direction: column;
+    align-items: center
+    ;
+}
+
+.mode {
+    display: flex;
+    gap: 20px;
+}
+
+.lang {
+    display: flex;
+    gap: 20px;
+}
+
+.flip_mode_word {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+
+.captcha_general {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+#id_captcha_1{
+    width: 80%;
+}
+
+.contact_entry {
+    max-width: 500px;
+    margin: 70px auto;
+    margin-top: 70px;
+    text-align: center;
+}
+
+.reset_login {
+    text-decoration-line: none;
+    color: black;
+    border: 1px solid;
+    padding: 10px 40px;
+    border-radius: 8px;
+}
+
+.reset_p {
+    display: flex;
+    justify-content: center;
+}
+
+.pronouns_button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pronouns_button:hover {
+  background-color: #0069d9;
+  transform: translateY(-2px);
+}
+
+.pronouns_button:active {
+  background-color: #005cbf;
+  transform: translateY(0);
+}

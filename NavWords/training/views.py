@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from words.models import WordList, Word
-from .vocabulary import vocabulary
-from .servise import QueryHandle
+from websockets.legacy.server import HTTPResponse
 
+from words.models import WordList, Word
+from .servise import QueryHandle
+from .pronouns import pronounce_word
 
 @login_required
 def choice_test(request):
@@ -94,4 +96,11 @@ def results(request):
     return render(request, 'training/results.html', context=data)
 
 
+def pronouns(request, word):
+    audio = pronounce_word(word)
+    if not audio:
+        return HttpResponse("Invalid word", status=400)
 
+    response = HttpResponse(audio, content_type="audio/mpeg")
+    response["Content-Disposition"] = f'inline; filename="{word}.mp3"'
+    return response

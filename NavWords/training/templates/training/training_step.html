@@ -8,10 +8,18 @@
 <div class="word">
     {% if type_training == 'reverse' %}
         <p>{{ word.english }}</p>
-        <br>
+        <p>
+          <button class="pronouns_button" type="button" onclick="playPronunciation('{{ word.english }}')">
+            🔊 Pronunciation
+          </button>
+        </p>
     {% elif  type_training == 'normal' %}
         <p>{{ word.translation }}</p>
-        <br>
+        <p>
+          <button class="pronouns_button" type="button" onclick="playPronunciation('{{ word.translation }}')">
+            🔊 Pronunciation
+          </button>
+        </p>
     {% endif %}
 </div>
 
@@ -21,13 +29,13 @@
     {% if mode == 'flip_mode' %}
         {% if type_training == 'reverse' %}
                     {% for choice in words %}
-                        <label>
+                        <label class="flip_mode_word">
                             {{ choice.translation }}
                         </label>
                     {% endfor %}
                 {% elif type_training == 'normal' %}
                     {% for choice in words %}
-                        <label>
+                        <label class="flip_mode_word">
                             {{ choice.english }}
                         </label>
                     {% endfor %}
@@ -64,5 +72,13 @@
     <button type="submit">Next</button>
 
 </form>
+
+<script>
+    function playPronunciation(word) {
+    const audio = new Audio(`/training/pronouns/${word}`);
+    audio.play()
+    .catch(err => console.error("Error playing audio:", err));
+    }
+</script>
 
 {% endblock content %}

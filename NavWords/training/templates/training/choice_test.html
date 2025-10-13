@@ -13,7 +13,7 @@
             {% if catalog %}
                 {% for c in catalog %}
                     <label>
-                        <input type="radio" name="vocabulary" value="{{ c.name }}">
+                        <input type="radio" name="vocabulary" value="{{ c.name }}" required>
                         {{ c.name }}
                     </label>
                 {% endfor %}
@@ -25,27 +25,31 @@
 
     <div class="settings-container">
         <h3>Settings</h3>
-            <div class="choice_bar">
-                <label>
-                    <input type="radio" name="translation" value="reverse" required>
-                    Reverse Translation
-                </label>
-                <label>
-                    <input type="radio" name="translation" value="normal">
-                    Normal mode
-                </label>
-                <label>
-                    <input type="radio" name="mode" value="flip_mode" required>
-                    Flip mode
-                </label>
-                <label>
-                    <input type="radio" name="mode" value="practice_mode">
-                    Practice mode
-                </label>
-                <label>
-                    <input type="radio" name="mode" value="challenge_mode">
-                    Challenge mode
-                </label>
+            <div class="bar_choice">
+                <div class="lang">
+                    <label>
+                        <input type="radio" name="translation" value="reverse" required>
+                        Reverse Translation
+                    </label>
+                    <label>
+                        <input type="radio" name="translation" value="normal">
+                        Normal Translation
+                    </label>
+                </div>
+                <div class="mode">
+                    <label>
+                        <input type="radio" name="mode" value="flip_mode" required>
+                        Flip mode
+                    </label>
+                    <label>
+                        <input type="radio" name="mode" value="practice_mode">
+                        Practice mode
+                    </label>
+                    <label>
+                        <input type="radio" name="mode" value="challenge_mode">
+                        Challenge mode
+                    </label>
+                </div>
             </div>
             <button type="submit">Save</button>
     </div>

@@ -74,11 +74,12 @@ class PasswordChange(PasswordChangeForm):
     class Meta:
         model = get_user_model()
         fields = ["old_password", "new_password1", "new_password2"]
-        labels = {
-            "old_password": 'Old password',
-            'new_password1': 'New password',
-            'new_password2': 'Repeat password'
-        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].label = 'Old password'
+        self.fields['new_password1'].label = 'New password'
+        self.fields['new_password2'].label = 'Repeat password'
 
 
 class ContactForm(forms.Form):
