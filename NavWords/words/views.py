@@ -6,6 +6,8 @@ from django.views.generic import ListView, CreateView, UpdateView
 from words.models import Word, WordList
 from words.forms import AddWordsList
 
+from rest_framework import generics
+from .serializers import WordListSerializer
 
 WordFormSet = inlineformset_factory(WordList, Word, can_delete=True, fields=['english', 'translation'], extra=1)
 
@@ -52,7 +54,7 @@ class CreateForm(LoginRequiredMixin, CreateView):
     template_name = 'words/add_list_words.html'
     form_class = AddWordsList
     success_url = reverse_lazy('home')
-    extra_context = {'title': 'Create l ist'}
+    extra_context = {'title': 'Create list'}
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -68,3 +70,8 @@ class CreateForm(LoginRequiredMixin, CreateView):
                     Word.objects.create(english=en, translation=tr, list=form.instance)
 
         return response
+
+
+class WordListAPIView(generics.ListAPIView):
+    queryset = WordList.objects.all()
+    serializer_class = WordListSerializer

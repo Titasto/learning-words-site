@@ -1,3 +1,7 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 """
 Django settings for NavWords project.
 
@@ -20,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)zuofu^rv@t--8*l7gtii4gcrn%rh2q5niex)duu68r8=!n=p#'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', '0') == '1'
 
 ALLOWED_HOSTS = []
 
@@ -44,8 +48,8 @@ INSTALLED_APPS = [
     'social_django',
     "django_extensions",
     'captcha',
+    'rest_framework',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,8 +61,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'NavWords.urls'
-
-MEDIA_ROOT = BASE_DIR / 'media'
 
 
 TEMPLATES = [
@@ -85,11 +87,11 @@ WSGI_APPLICATION = 'NavWords.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'justlearning_db',
-        'USER': 'justlearning',
-        'PASSWORD': 2337,
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
