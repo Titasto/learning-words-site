@@ -3,6 +3,9 @@ from django.db import transaction
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from words.models import Word, WordList
 from words.forms import AddWordsList
 
@@ -72,6 +75,16 @@ class CreateForm(LoginRequiredMixin, CreateView):
         return response
 
 
-class WordListAPIView(generics.ListAPIView):
+class WordListApiList(generics.ListCreateAPIView):
+    queryset = WordList.objects.all()
+    serializer_class = WordListSerializer
+
+
+class WordListApiUpdate(generics.UpdateAPIView):
+    queryset = WordList.objects.all()
+    serializer_class = WordListSerializer
+
+
+class WordListApiDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = WordList.objects.all()
     serializer_class = WordListSerializer

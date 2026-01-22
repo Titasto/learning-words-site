@@ -2,7 +2,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from . import settings
-from words.views import WordListAPIView
+from words.views import WordListApiList, WordListApiUpdate, WordListApiDetailView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,7 +13,9 @@ urlpatterns = [
     path('training/', include('training.urls', namespace='training')),
     path("social-auth/", include('social_django.urls', namespace="social")),
     path('captcha/', include('captcha.urls')),
-    path('api/v1/wordlist/', WordListAPIView.as_view())
+    path('api/v1/wordlist/', WordListApiList.as_view()),
+    path('api/v1/wordlist/<int:pk>/', WordListApiUpdate.as_view()),
+    path('api/v1/wordlist/<int:pk>/', WordListApiDetailView.as_view())
 ]
 
 if settings.DEBUG:
