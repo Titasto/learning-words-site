@@ -1,9 +1,13 @@
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from . import settings
-from words.views import WordListApiList, WordListApiUpdate, WordListApiDetailView
+from rest_framework import routers
 
+from . import settings
+from words.views import WordsListAPIView
+
+router = routers.SimpleRouter()
+router.register(r'wordlist', WordsListAPIView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,9 +17,7 @@ urlpatterns = [
     path('training/', include('training.urls', namespace='training')),
     path("social-auth/", include('social_django.urls', namespace="social")),
     path('captcha/', include('captcha.urls')),
-    path('api/v1/wordlist/', WordListApiList.as_view()),
-    path('api/v1/wordlist/<int:pk>/', WordListApiUpdate.as_view()),
-    path('api/v1/wordlist/<int:pk>/', WordListApiDetailView.as_view())
+        path('api/v1/', include(router.urls))
 ]
 
 if settings.DEBUG:

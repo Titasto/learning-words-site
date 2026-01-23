@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from words.models import Word, WordList
 from words.forms import AddWordsList
 
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from .serializers import WordListSerializer
 
 WordFormSet = inlineformset_factory(WordList, Word, can_delete=True, fields=['english', 'translation'], extra=1)
@@ -75,16 +75,6 @@ class CreateForm(LoginRequiredMixin, CreateView):
         return response
 
 
-class WordListApiList(generics.ListCreateAPIView):
-    queryset = WordList.objects.all()
-    serializer_class = WordListSerializer
-
-
-class WordListApiUpdate(generics.UpdateAPIView):
-    queryset = WordList.objects.all()
-    serializer_class = WordListSerializer
-
-
-class WordListApiDetailView(generics.RetrieveUpdateDestroyAPIView):
+class WordsListAPIView(viewsets.ModelViewSet):
     queryset = WordList.objects.all()
     serializer_class = WordListSerializer
